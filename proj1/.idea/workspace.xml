@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0c664bd8-6c85-4d04-89e0-b7bbf3adf97e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1ZySVzudxO6LtbWZFJCxJvAj1R8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager" selected="Python.proj1_part2">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="proj1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="proj1_part1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="proj1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/proj1_part1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="proj1_part2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="proj1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/proj1_part2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.proj1_part2" />
+        <item itemvalue="Python.proj1_part1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c664bd8-6c85-4d04-89e0-b7bbf3adf97e" name="Default Changelist" comment="" />
+      <created>1585809868641</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585809868641</updated>
+      <workItem from="1585809874785" duration="81000" />
+      <workItem from="1585809983724" duration="3592000" />
+      <workItem from="1585813596569" duration="663000" />
+      <workItem from="1585814283793" duration="2038000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="739" y="368" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585809994900">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="739" y="368" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1440/2560.360.1920.1080@0.0.2560.1440" timestamp="1585809994900" />
+    <state x="951" y="407" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585813706345">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="951" y="407" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1440/2560.360.1920.1080@0.0.2560.1440" timestamp="1585813706345" />
+    <state x="1014" y="400" key="FileChooserDialogImpl" timestamp="1585812133682">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="1014" y="400" key="FileChooserDialogImpl/0.0.2560.1440/2560.360.1920.1080@0.0.2560.1440" timestamp="1585812133682" />
+    <state x="664" y="264" key="SettingsEditor" timestamp="1585812178165">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="664" y="264" key="SettingsEditor/0.0.2560.1440/2560.360.1920.1080@0.0.2560.1440" timestamp="1585812178165" />
+    <state x="895" y="507" key="com.intellij.ide.util.TipDialog" timestamp="1585814288451">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="895" y="507" key="com.intellij.ide.util.TipDialog/0.0.2560.1440/2560.360.1920.1080@0.0.2560.1440" timestamp="1585814288451" />
+    <state x="841" y="248" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1585813986877">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="841" y="248" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1440/2560.360.1920.1080@0.0.2560.1440" timestamp="1585813986877" />
+  </component>
+</project>
