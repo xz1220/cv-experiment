@@ -70,7 +70,7 @@ def gen_hybrid_image(image1, image2, cutoff_frequency):
 
   # (3) Combine the high frequencies and low frequencies
   # Your code here #
-  hybrid_image = cv2.add(image1,image2) # Replace with your implementation
+  hybrid_image = cv2.add(low_frequencies,high_frequencies) # Replace with your implementation
 
   # (4) At this point, you need to be aware that values larger than 1.0
   # or less than 0.0 may cause issues in the functions in Python for saving

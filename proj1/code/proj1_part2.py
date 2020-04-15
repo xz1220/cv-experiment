@@ -41,11 +41,11 @@ low_frequencies, high_frequencies, hybrid_image = gen_hybrid_image(image1, image
 plt.figure(); plt.imshow((low_frequencies*255).astype(np.uint8));plt.show();
 plt.figure(); plt.imshow(((high_frequencies+0.5)*255).astype(np.uint8));plt.show();
 vis = vis_hybrid_image(hybrid_image)
-plt.figure(figsize=(20, 20)); plt.imshow(vis);plt.savefig('../results/hybrid_image_scales.jpg');plt.show();
+plt.figure(figsize=(20, 20)); plt.imshow(vis);plt.savefig('../results/hybrid_image_scales.jpg');
 
 #print(np.rint(low_frequencies*255))
 save_image('../results/low_frequencies.jpg', (low_frequencies*255).astype(np.uint8))
 save_image('../results/high_frequencies.jpg', ((high_frequencies+0.5)*255).astype(np.uint8))
-# # save_image('../results/hybrid_image.jpg', hybrid_image)
+save_image('../results/hybrid_image.jpg', hybrid_image)
 # print(vis)
 # save_image('../results/hybrid_image_scales.jpg', (vis*255).astype(np.uint8))

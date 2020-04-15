@@ -1,10 +1,15 @@
 import numpy as np
+import cv2
+import os
 import matplotlib
 from skimage.io import imread
 from skimage.color import rgb2grey
 from skimage.feature import hog
 from skimage.transform import resize
 from scipy.spatial.distance import cdist
+from sklearn import svm
+from sklearn.neighbors import KNeighborsClassifier
+from scipy.cluster.vq import *
 
 def get_tiny_images(image_paths):
     '''
@@ -39,7 +44,17 @@ def get_tiny_images(image_paths):
 
     #TODO: Implement this function!
 
-    return np.array([])
+    images=np.empty([len(image_paths),256])
+
+    for i in range(len(image_paths)):
+        image=cv2.imread(image_paths[i])
+        image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        image=cv2.resize(image,(16,16))
+        cv2.normalize(image,image,0,255,cv2.NORM_MINMAX)  # 正则化后，tiny-knn 有所提升，tiny-svm下降
+        images[i,:]=image.reshape(1,-1)
+
+
+    return images
 
 def build_vocabulary(image_paths, vocab_size):
     '''
@@ -113,7 +128,29 @@ def build_vocabulary(image_paths, vocab_size):
 
     #TODO: Implement this function!
 
-    return np.array([])
+    sift=cv2.xfeatures2d.SIFT_create()
+
+    # 特征提取与描述子生成
+    des_list = []
+
+    for image_path in image_paths:
+        im = cv2.imread(image_path)
+        # im = cv2.resize(im, (300, 300))
+        kpts = sift.detect(im)
+        kpts, des = sift.compute(im, kpts)
+        des_list.append((image_path, des))
+        print("image file path : ", image_path)
+
+    # 描述子向量
+    descriptors = des_list[0][1]
+    for image_path, descriptor in des_list[1:]:
+        descriptors = np.vstack((descriptors, descriptor))
+
+    # 聚类 K-Means
+    voc, variance = kmeans(descriptors, vocab_size, 1)
+    print(voc.shape)
+
+    return np.array(voc)
 
 def get_bags_of_words(image_paths):
     '''
@@ -145,12 +182,37 @@ def get_bags_of_words(image_paths):
                          np.linalg.norm, skimage.feature.hog
     '''
 
-    vocab = np.load('vocab.npy')
-    print('Loaded vocab from file.')
+    if not os.path.isfile('im_feature.npy'):
+        # 创建SIFT特征提取器
+        sift = cv2.xfeatures2d.SIFT_create()
 
-    #TODO: Implement this function!
+        # 特征提取与描述子生成
+        des_list = []
 
-    return np.array([])
+        for image_path in image_paths:
+            im = cv2.imread(image_path)
+            #im = cv2.resize(im, (300, 300))
+            kpts = sift.detect(im)
+            kpts, des = sift.compute(im, kpts)
+            des_list.append((image_path, des))
+            print("image file path : ", image_path)
+
+        vocab = np.load('vocab.npy')
+        print('Loaded vocab from file.')
+
+        #TODO: Implement this function!
+        # 生成特征直方图
+        im_features = np.zeros((len(image_paths), 200), "float32")
+        for i in range(len(image_paths)):
+            words, distance = vq(des_list[i][1], vocab)
+            for w in words:
+                im_features[i][w] += 1
+
+        np.save('im_feature.npy',im_features)
+        return np.array(im_features)
+    else:
+        return np.load('im_feature.npy')
+
 
 def svm_classify(train_image_feats, train_labels, test_image_feats):
     '''
@@ -176,8 +238,11 @@ def svm_classify(train_image_feats, train_labels, test_image_feats):
     '''
 
     # TODO: Implement this function!
-
-    return np.array([])
+    clr=svm.SVC(decision_function_shape='ovo')
+    clr.fit(train_image_feats,train_labels)
+    result=clr.predict(test_image_feats)
+    print(result.shape)
+    return np.array(result)
 
 def nearest_neighbor_classify(train_image_feats, train_labels, test_image_feats):
     '''
@@ -218,11 +283,11 @@ def nearest_neighbor_classify(train_image_feats, train_labels, test_image_feats)
         scipy.spatial.distance.cdist, np.argsort, scipy.stats.mode
     '''
 
-    k = 1
+    #k = 1
 
     # Gets the distance between each test image feature and each train image feature
     # e.g., cdist
-    distances = cdist(test_image_feats, train_image_feats, 'euclidean')
+    #distances = cdist(test_image_feats, train_image_feats, 'euclidean')
 
     #TODO:
     # 1) Find the k closest features to each test image feature in euclidean space
@@ -230,4 +295,8 @@ def nearest_neighbor_classify(train_image_feats, train_labels, test_image_feats)
     # 3) Pick the most common label from the k
     # 4) Store that label in a list
 
-    return np.array([])
+    knn=KNeighborsClassifier(n_neighbors=10,weights="distance")
+    knn.fit(train_image_feats,train_labels)
+    result=knn.predict(test_image_feats)
+    print(result.shape)
+    return np.array(result)

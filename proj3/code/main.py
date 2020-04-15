@@ -7,6 +7,7 @@ from student import get_tiny_images, build_vocabulary, get_bags_of_words, \
     svm_classify, nearest_neighbor_classify
 from create_results_webpage import create_results_webpage
 
+
 def projSceneRecBoW():
     '''
     For this project, you will need to report performance for three
@@ -34,7 +35,7 @@ def projSceneRecBoW():
                         different distance metrics.
      accuracy ~= .50 -> You've gotten things roughly correct with bag of
                         word and a linear SVM classifier.
-     accuracy >= .70 -> You've also tuned your parameters well. E.g. number
+     accuracy >= .nearest neighbor -> You've also tuned your parameters well. E.g. number
                         of clusters, SVM regularization, number of patches
                         sampled when building vocabulary, size and step for
                         dense features.
@@ -57,12 +58,12 @@ def projSceneRecBoW():
     # Uncomment various feature and classifier combinations to test them.
 
     #FEATURE = 'tiny image'
-    #FEATURE = 'bag of words'
-    FEATURE = 'placeholder'
+    FEATURE = 'bag of words'
+    #FEATURE = 'tiny image'
 
     #CLASSIFIER = 'nearest neighbor'
+    CLASSIFIER = 'support vector machine'
     #CLASSIFIER = 'support vector machine'
-    CLASSIFIER = 'placeholder'
 
     # This is the path the script will look at to load images from.
     data_path = '../data/'
@@ -111,6 +112,7 @@ def projSceneRecBoW():
         train_image_feats = get_tiny_images(train_image_paths)
         test_image_feats  = get_tiny_images(test_image_paths)
         print('Tiny images loaded.')
+
 
     elif FEATURE.lower() == 'bag of words':
         # Because building the vocabulary takes a long time, we save the generated
@@ -165,6 +167,7 @@ def projSceneRecBoW():
         predicted_categories = svm_classify(train_image_feats, train_labels, test_image_feats)
 
     elif CLASSIFIER.lower() == 'placeholder':
+        print("classificator is placeholder")
         #The placeholder classifier simply predicts a random category for every test case
         random_permutation = np.random.permutation(len(test_labels))
         predicted_categories = [test_labels[i] for i in random_permutation]
