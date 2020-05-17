@@ -16,6 +16,8 @@ from skimage import io, filters, feature, img_as_float32
 from skimage.transform import rescale
 from skimage.color import rgb2gray
 
+from utils import *
+import cv2
 import student
 import visualize
 from helpers import cheat_interest_points, evaluate_correspondence
@@ -60,8 +62,11 @@ def load_data(file_name):
     """
 
     # Note: these files default to notre dame, unless otherwise specified
-    image1_file = "../data/NotreDame/NotreDame1.jpg"
-    image2_file = "../data/NotreDame/NotreDame2.jpg"
+    # image1_file = "../data/NotreDame/NotreDame1.jpg"
+    # image2_file = "../data/NotreDame/NotreDame2.jpg"
+
+    image1_file = "../data/NotreDameCopy/Notre1.jpg"
+    image2_file = "../data/NotreDameCopy/Notre2.jpg"
 
     eval_file = "../data/NotreDame/NotreDameEval.mat"
 
@@ -76,8 +81,13 @@ def load_data(file_name):
         image2_file = "../data/EpiscopalGaudi/EGaudi_2.jpg"
         eval_file = "../data/EpiscopalGaudi/EGaudiEval.mat"
 
-    image1 = img_as_float32(io.imread(image1_file))
-    image2 = img_as_float32(io.imread(image2_file))
+    image1 = cv2.imread(image1_file)
+    image1 = image1.astype(np.float32)/255
+    image1 = image1[:, :, ::-1]
+    # image2 = img_as_float32(io.imread(image2_file))
+    image2 = cv2.imread(image2_file)
+    image2 = image2.astype(np.float32)/255
+    image2 = image2[:, :, ::-1]
 
     return image1, image2, eval_file
 
@@ -106,24 +116,29 @@ def main():
     # (1) Load in the data
     image1, image2, eval_file = load_data(args.pair)
 
-    # You don't have to work with grayscale images. Matching with color
-    # information might be helpful. If you choose to work with RGB images, just
-    # comment these two lines
-    image1 = rgb2gray(image1)
-    image2 = rgb2gray(image2)
+    # # You don't have to work with grayscale images. Matching with color
+    # # information might be helpful. If you choose to work with RGB images, just
+    # # comment these two lines
+    # image1 = rgb2gray(image1)
+    # image2 = rgb2gray(image2)
     
-    # make images smaller to speed up the algorithm. This parameter
-    # gets passed into the evaluation code, so don't resize the images
-    # except for changing this parameter - We will evaluate your code using
-    # scale_factor = 0.5, so be aware of this
-    scale_factor = 0.5
+    # # make images smaller to speed up the algorithm. This parameter
+    # # gets passed into the evaluation code, so don't resize the images
+    # # except for changing this parameter - We will evaluate your code using
+    # # scale_factor = 0.5, so be aware of this
+    # scale_factor = 0.5
 
-    # Bilinear rescaling
-    image1 = np.float32(rescale(image1, scale_factor))
-    image2 = np.float32(rescale(image2, scale_factor))
+    # # Bilinear rescaling
+    # image1 = np.float32(rescale(image1, scale_factor))
+    # image2 = np.float32(rescale(image2, scale_factor))
 
-    # width and height of each local feature, in pixels
+    # # width and height of each local feature, in pixels
     feature_width = 16
+    scale_factor = 0.5
+    image1 = cv2.resize(image1, (0, 0), fx=scale_factor, fy=scale_factor)
+    image2 = cv2.resize(image2, (0, 0), fx=scale_factor, fy=scale_factor)
+    image1_bw = cv2.cvtColor(image1, cv2.COLOR_RGB2GRAY)
+    image2_bw = cv2.cvtColor(image2, cv2.COLOR_RGB2GRAY)
 
     # (2) Find distinctive points in each image. See Szeliski 4.1.1
     # !!! You will need to implement get_interest_points. !!!
@@ -135,28 +150,30 @@ def main():
     # lines and uncomment the following line to do this.
 
     #(x1, y1, x2, y2) = cheat_interest_points(eval_file, scale_factor)
-
-    (x1, y1) = student.get_interest_points(image1, feature_width)
-    (x2, y2) = student.get_interest_points(image2, feature_width)
+    print("Getting interest points of image1...")
+    (x1, y1) = student.get_interest_points(image1_bw, feature_width)
+    print("Getting interest points of image2...")
+    (x2, y2) = student.get_interest_points(image2_bw, feature_width)
 
     # if you want to view your corners uncomment these next lines!
+    print("Show the interest points!")
+    plt.imshow(image1, cmap="gray")
+    plt.scatter(x1, y1, alpha=0.9, s=3)
+    plt.show()
 
-    # plt.imshow(image1, cmap="gray")
-    # plt.scatter(x1, y1, alpha=0.9, s=3)
-    # plt.show()
+    plt.imshow(image2, cmap="gray")
+    plt.scatter(x2, y2, alpha=0.9, s=3)
+    plt.show()
 
-    # plt.imshow(image2, cmap="gray")
-    # plt.scatter(x2, y2, alpha=0.9, s=3)
-    # plt.show()
-
+    print('{:d} corners in image 1, {:d} corners in image 2'.format(len(x1), len(x2)))
     print("Done!")
 
     # 3) Create feature vectors at each interest point. Szeliski 4.1.2
     # !!! You will need to implement get_features. !!!
 
     print("Getting features...")
-    image1_features = student.get_features(image1, x1, y1, feature_width)
-    image2_features = student.get_features(image2, x2, y2, feature_width)
+    image1_features = student.get_features(image1_bw, x1, y1, feature_width)
+    image2_features = student.get_features(image2_bw, x2, y2, feature_width)
 
     print("Done!")
 
@@ -165,12 +182,13 @@ def main():
 
     print("Matching features...")
     matches, confidences = student.match_features(image1_features, image2_features)
-    
+    print('{:d} matches from {:d} corners'.format(len(matches), len(x1)))
     if len(matches.shape) == 1:
         print( "No matches!")
         return
     
     print("Done!")
+    print("matche shape:",matches.shape)
 
 
     # 5) Visualization

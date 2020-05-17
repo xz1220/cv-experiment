@@ -26,6 +26,7 @@ def my_imfilter(image, filter):
 
   ##################
   # Your code here #
+  print(filter)
   filtered_image=cv2.filter2D(image,-1,filter)
   
   # raise NotImplementedError('my_imfilter function in helpers.py needs to be implemented')
@@ -54,7 +55,8 @@ def gen_hybrid_image(image1, image2, cutoff_frequency):
   # Steps:
   # (1) Remove the high frequencies from image1 by blurring it. The amount of
   #     blur that works best will vary with different image pairs
-  # generate a 1x(2k+1) gaussian kernel with mean=0 and sigma = s, see https://stackoverflow.com/questions/17190649/how-to-obtain-a-gaussian-filter-in-python
+  # generate a 1x(2k+1) gaussian kernel with mean=0 and sigma = s, 
+  # see https://stackoverflow.com/questions/17190649/how-to-obtain-a-gaussian-filter-in-python
   s, k = cutoff_frequency, cutoff_frequency*2
   probs = np.asarray([exp(-z*z/(2*s*s))/sqrt(2*pi*s*s) for z in range(-k,k+1)], dtype=np.float32)
   kernel = np.outer(probs, probs)

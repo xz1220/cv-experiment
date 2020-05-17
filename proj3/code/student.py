@@ -47,11 +47,11 @@ def get_tiny_images(image_paths):
     images=np.empty([len(image_paths),256])
 
     for i in range(len(image_paths)):
-        image=cv2.imread(image_paths[i])
+        image=cv2.imread(image_paths[i])  
         image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
         image=cv2.resize(image,(16,16))
         cv2.normalize(image,image,0,255,cv2.NORM_MINMAX)  # 正则化后，tiny-knn 有所提升，tiny-svm下降
-        images[i,:]=image.reshape(1,-1)
+        images[i,:]=image.reshape(1,-1) # 将图像转成行向量
 
 
     return images
@@ -128,7 +128,7 @@ def build_vocabulary(image_paths, vocab_size):
 
     #TODO: Implement this function!
 
-    sift=cv2.xfeatures2d.SIFT_create()
+    sift=cv2.xfeatures2d.SIFT_create()  # 没有使用hog特征而是使用SIFT特征
 
     # 特征提取与描述子生成
     des_list = []

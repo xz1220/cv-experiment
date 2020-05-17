@@ -2,6 +2,7 @@
 # Based on previous and current work
 # by James Hays for CSCI 1430 @ Brown and
 # CS 4495/6476 @ Georgia Tech
+import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from helpers import vis_hybrid_image, load_image, save_image, my_imfilter, gen_hybrid_image
@@ -44,8 +45,10 @@ vis = vis_hybrid_image(hybrid_image)
 plt.figure(figsize=(20, 20)); plt.imshow(vis);plt.savefig('../results/hybrid_image_scales.jpg');
 
 #print(np.rint(low_frequencies*255))
+low_frequencies_unit=(low_frequencies*255).astype(np.uint8)
+high_frequencies_uint=((high_frequencies+0.5)*255).astype(np.uint8)
 save_image('../results/low_frequencies.jpg', (low_frequencies*255).astype(np.uint8))
 save_image('../results/high_frequencies.jpg', ((high_frequencies+0.5)*255).astype(np.uint8))
-save_image('../results/hybrid_image.jpg', hybrid_image)
-# print(vis)
+# save_image('../results/hybrid_image.jpg', cv2.add((low_frequencies*255).astype(np.uint8),((high_frequencies+0.5)*255).astype(np.uint8))
+plt.figure(); plt.imshow(hybrid_image);plt.savefig('../results/hybrid_image.jpg');plt.show();
 # save_image('../results/hybrid_image_scales.jpg', (vis*255).astype(np.uint8))
