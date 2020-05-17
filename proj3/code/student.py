@@ -204,7 +204,7 @@ def get_bags_of_words(image_paths):
         # 生成特征直方图
         im_features = np.zeros((len(image_paths), 200), "float32")
         for i in range(len(image_paths)):
-            words, distance = vq(des_list[i][1], vocab)
+            words, distance = vq(des_list[i][1], vocab)  #分类，最近的聚类中心
             for w in words:
                 im_features[i][w] += 1
 
@@ -238,7 +238,7 @@ def svm_classify(train_image_feats, train_labels, test_image_feats):
     '''
 
     # TODO: Implement this function!
-    clr=svm.SVC(decision_function_shape='ovo')
+    clr=svm.SVC(decision_function_shape='ovr')
     clr.fit(train_image_feats,train_labels)
     result=clr.predict(test_image_feats)
     print(result.shape)
